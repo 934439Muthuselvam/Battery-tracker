@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery Percentage</title>
+</head>
+<body>
+    <h1>Check Battery Status</h1>
+    <p id="battery-status">Fetching battery percentage...</p>
+
+    <script>
+        if (navigator.getBattery) {
+            navigator.getBattery().then(function (battery) {
+                const updateBatteryInfo = () => {
+                    const level = battery.level * 100;
+                    document.getElementById('battery-status').textContent = `Battery Level: ${level}%`;
+                };
+
+                // Update battery info when page loads
+                updateBatteryInfo();
+
+                // Add event listeners for real-time updates
+                battery.addEventListener('levelchange', updateBatteryInfo);
+            });
+        } else {
+            document.getElementById('battery-status').textContent = "Battery API not supported in this browser.";
+        }
+    </script>
+</body>
+</html>
