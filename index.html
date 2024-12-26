@@ -3,29 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battery Percentage</title>
+    <title>Battery and User Info</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Check Battery Status</h1>
+    <h1>Check Battery and User Info</h1>
     <p id="battery-status">Fetching battery percentage...</p>
+    <form id="user-form">
+        <input type="text" id="user-name" placeholder="Enter your name" required />
+        <button type="button" id="submit-btn">Submit</button>
+    </form>
+    <p id="result"></p>
 
-    <script>
-        if (navigator.getBattery) {
-            navigator.getBattery().then(function (battery) {
-                const updateBatteryInfo = () => {
-                    const level = battery.level * 100;
-                    document.getElementById('battery-status').textContent = `Battery Level: ${level}%`;
-                };
-
-                // Update battery info when page loads
-                updateBatteryInfo();
-
-                // Add event listeners for real-time updates
-                battery.addEventListener('levelchange', updateBatteryInfo);
-            });
-        } else {
-            document.getElementById('battery-status').textContent = "Battery API not supported in this browser.";
-        }
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
